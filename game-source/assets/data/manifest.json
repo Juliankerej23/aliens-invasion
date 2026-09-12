@@ -1,0 +1,48 @@
+{
+  "player_walk": [
+    "act_main_l_0000.PNG",
+    "act_main_l_0001.PNG",
+    "act_main_l_0002.PNG",
+    "act_main_l_0003.PNG"
+  ],
+  "player_shoot": [
+    "act_main_l_0100.PNG",
+    "act_main_l_0101.PNG"
+  ],
+  "alien_a": [
+    "act_npca_l_0000.PNG",
+    "act_npca_l_0001.PNG",
+    "act_npca_l_0002.PNG",
+    "act_npca_l_0003.PNG",
+    "act_npca_l_0004.PNG",
+    "act_npca_l_0005.PNG"
+  ],
+  "alien_b": [
+    "act_npcb_l_0000.PNG",
+    "act_npcb_l_0001.PNG",
+    "act_npcb_l_0002.PNG",
+    "act_npcb_l_0003.PNG",
+    "act_npcb_l_0004.PNG",
+    "act_npcb_l_0005.PNG"
+  ],
+  "alien_c": [
+    "act_npcc_l_0000.PNG",
+    "act_npcc_l_0001.PNG",
+    "act_npcc_l_0002.PNG",
+    "act_npcc_l_0003.PNG",
+    "act_npcc_l_0004.PNG",
+    "act_npcc_l_0005.PNG"
+  ],
+  "weapon_pistol": [
+    "act_gun00_l_0000.PNG",
+    "act_gun00_l_0001.PNG",
+    "act_gun00_l_0002.PNG",
+    "act_gun00_l_0003.PNG"
+  ],
+  "weapon_1": [
+    "act_gun01_l_0000.PNG",
+    "act_gun01_l_0001.PNG",
+    "act_gun01_l_0002.PNG",
+    "act_gun01_l_0003.PNG"
+  ]
+}

@@ -1,0 +1,66 @@
+name: Build Aliens Invasion Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify Android game files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f ./android-game/main.lua
+          test -f ./android-game/conf.lua
+          test -d ./android-game/src
+          test -d ./android-game/assets
+          echo "Android embed root:" 
+          find ./android-game -maxdepth 2 -type f | sort | head -40
+
+      - name: Build LÖVE 2D Android APK
+        id: build-love
+        uses: love-actions/love-actions-android@v2
+        with:
+          app-name: "Aliens Invasion"
+          bundle-id: "com.aliensinvasion.lan"
+          resource-path: "./android/res"
+          icon-specifier: "@drawable/app_icon"
+          love-ref: "11.5a"
+          # Deliberately leave love-package empty. The action extracts a .love
+          # package with 7z; for Android we embed the raw game tree instead,
+          # guaranteeing main.lua is directly under app/src/embed/assets/.
+          love-package: ""
+          extra-assets: "./android-game/*"
+          product-name: "aliens-invasion-v40"
+          version-string: "0.40.0"
+          version-code: 40
+          output-folder: "./dist"
+
+      - name: Verify APK contains main.lua at Android embed root
+        shell: bash
+        run: |
+          set -euo pipefail
+          APK="./dist/aliens-invasion-v40-debug.apk"
+          test -f "$APK"
+          echo "APK contents related to the embedded game:"
+          unzip -l "$APK" | grep -E 'assets/(main.lua|conf.lua|src/|assets/)' | head -80
+          unzip -l "$APK" | grep -qE 'assets/main\.lua$'
+          unzip -l "$APK" | grep -qE 'assets/conf\.lua$'
+          echo "OK: main.lua and conf.lua are at the Android embed root."
+
+      - name: Upload Android APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: aliens-invasion-v40-android
+          path: dist/aliens-invasion-v40-debug.apk
+          if-no-files-found: error
