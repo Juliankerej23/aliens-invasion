@@ -39,7 +39,7 @@ jobs:
           # Deliberately leave love-package empty. The action extracts a .love
           # package with 7z; for Android we embed the raw game tree instead,
           # guaranteeing main.lua is directly under app/src/embed/assets/.
-          love-package: ""
+          love-package: "./game.love"
           extra-assets: "./android-game/*"
           product-name: "aliens-invasion-v40"
           version-string: "0.40.0"
